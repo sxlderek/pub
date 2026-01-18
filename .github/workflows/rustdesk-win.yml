@@ -1,0 +1,88 @@
+name: RustdeskVM
+
+on:
+  workflow_dispatch:
+
+jobs:
+  secure-rdp:
+    runs-on: windows-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Install RustDesk via Chocolatey
+        shell: pwsh
+        run: |
+          choco install rustdesk -y
+          & "$env:ProgramFiles\RustDesk\rustdesk.exe" --install-service
+
+      - name: Configure RustDesk
+        shell: pwsh
+        run: |
+          $password = "${{ secrets.RUSTDESK_PASSWORD }}"
+          while (-not (Get-Service "RustDesk" -ErrorAction SilentlyContinue)) {
+            Start-Sleep -Seconds 1
+          }
+          & "$env:ProgramFiles\RustDesk\rustdesk.exe" --password $password
+          & "$env:ProgramFiles\RustDesk\rustdesk.exe" --option allow-remote-config-modification Y
+
+      - name: Set Display Resolution 1920x1080
+        shell: pwsh
+        run: |
+          Set-DisplayResolution -Width 1920 -Height 1080 -Force
+          Write-Host "Display resolution set to 1920x1080"
+
+      - name: Get RustDesk ID and Send Email
+        id: rustdesk-info
+        shell: pwsh
+        env:
+          EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          RUSTDESK_PASSWORD: ${{ secrets.RUSTDESK_PASSWORD }}
+        run: |
+          $id = & "$env:ProgramFiles\RustDesk\rustdesk.exe" --get-id | Out-String
+          $id = $id.Trim()
+          
+          Write-Host "RustDesk ID: $id"
+          Write-Host "RustDesk Password: $env:RUSTDESK_PASSWORD"
+          echo "id=$id" >> $env:GITHUB_OUTPUT
+          
+          if ($env:EMAIL_USERNAME -and $env:EMAIL_PASSWORD -and $env:EMAIL_TO -and $env:RUSTDESK_PASSWORD) {
+            $securePassword = ConvertTo-SecureString $env:EMAIL_PASSWORD -AsPlainText -Force
+            $credential = New-Object System.Management.Automation.PSCredential($env:EMAIL_USERNAME, $securePassword)
+            
+            $subject = "RustdeskVM Ready - ID: $id | Status: ${{ job.status }}"
+            $body = "RustdeskVM Ready!`n`nID: $id`nPassword: $env:RUSTDESK_PASSWORD`nResolution: 1920x1080`nStatus: ${{ job.status }}`nRun URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`n`nConnect now via RustDesk client!"
+            
+            Send-MailMessage -To $env:EMAIL_TO `
+                           -From $env:EMAIL_USERNAME `
+                           -Subject $subject `
+                           -Body $body `
+                           -SmtpServer "smtp.gmail.com" `
+                           -Port 587 `
+                           -UseSsl `
+                           -Credential $credential
+                              
+            Write-Host "Email sent successfully to $env:EMAIL_TO (Send-MailMessage)"
+          } else {
+            Write-Host "Required secrets missing - skipping email"
+            Write-Host "RustDesk ID: $id"
+            Write-Host "RustDesk Password: $env:RUSTDESK_PASSWORD"
+          }
+
+      - name: Maintain Connection
+        if: always()
+        shell: pwsh
+        run: |
+          $id = "${{ steps.rustdesk-info.outputs.id }}"
+          $password = "${{ secrets.RUSTDESK_PASSWORD }}"
+          Write-Host "=== RustdeskVM Active ==="
+          Write-Host "ID: $id"
+          Write-Host "Password: $password"
+          Write-Host "Resolution: 1920x1080"
+          Write-Host "==================="
+         
+          while ($true) {
+            Write-Host "[$(Get-Date)] RustdeskVM Active - ID: $id - cancel workflow to terminate"
+            Start-Sleep -Seconds 300
+          }
