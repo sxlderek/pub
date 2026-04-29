@@ -3,7 +3,8 @@
 SiliconFlow media workflow skill converted from OpenClaw into Hermes-agent format.
 
 ## Origin
-- Original skill source: `/home/derek/.openclaw/workspace/skills/siliconflow-media`
+- Original skill source: `https://clawhub.ai/axdlee/siliconflow-media`
+- Original skill source path: `/home/derek/.openclaw/workspace/skills/siliconflow-media`
 - Original author: Tom FONG
 
 ## Conversion
