@@ -96,6 +96,10 @@ scripts/models.sh audio
 - `--image-url` enables image-to-image or image-to-video flows where supported.
 - For large or slower jobs, the analysis and transcription scripts already use longer timeouts.
 
+## Troubleshooting
+- If a generation returns a small text file such as `error code: 1027`, the request reached Pollinations but the selected model failed. Try a different image model or adjust the prompt.
+- Always re-check the live model list with `scripts/models.sh image` before assuming a model name is currently available.
+
 ## Linked scripts
 - `scripts/chat.sh`
 - `scripts/image.sh`
