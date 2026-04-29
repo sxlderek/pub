@@ -14,3 +14,4 @@ Each skill folder includes:
 - `README.md`
 - `LICENSE`
 - `siliconflow-media-skill` — SiliconFlow media workflows for image generation, video generation, TTS, and ASR.
+- `pollinations-skill` — Pollinations AI generation and analysis for text, images, video, audio, vision, and transcription.
