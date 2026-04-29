@@ -2,6 +2,14 @@
 
 Look up domain WHOIS information and optionally capture website screenshots.
 
+## Origin
+- Original skill source: `/home/derek/.openclaw/workspace/skills/whois-skill`
+- Original author: Tom FONG
+
+## Conversion
+- Converted and tested in Hermes-agent format.
+- Published as a Hermes skill package for the `pub/skills` repo.
+
 ## What it does
 
 Use this skill when the user asks for:

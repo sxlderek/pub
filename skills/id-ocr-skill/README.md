@@ -1,12 +1,14 @@
 # id-ocr-skill
 
-Extract a person’s identity fields from an uploaded ID document image.
+ID OCR skill converted from OpenClaw into Hermes-agent format.
 
-## What it does
+## Origin
+- Original skill source: `/home/derek/.openclaw/workspace/skills/id-ocr`
+- Original author: Tom FONG
 
-Use this skill when the user asks to OCR an ID document or types `id-ocr-skill`.
-
-## Output
+## Conversion
+- Converted and tested in Hermes-agent format.
+- Published as a Hermes skill package for the `pub/skills` repo.
 
 Return:
 
