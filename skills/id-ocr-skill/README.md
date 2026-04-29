@@ -1,10 +1,10 @@
-# id-ocr
+# id-ocr-skill
 
 Extract a person’s identity fields from an uploaded ID document image.
 
 ## What it does
 
-Use this skill when the user asks to OCR an ID document or types `id-ocr`.
+Use this skill when the user asks to OCR an ID document or types `id-ocr-skill`.
 
 ## Output
 

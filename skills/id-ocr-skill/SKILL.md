@@ -1,13 +1,13 @@
 ---
-name: id-ocr
-slug: id-ocr
+name: id-ocr-skill
+slug: id-ocr-skill
 version: 1.1.0
 description: Extract a person’s identity fields from an uploaded ID document image, including transliterated English name and normalized dates.
 ---
 
 ## When to Use
 
-Use this skill when the user types **"id-ocr"** (or asks to OCR an ID document) and wants structured identity details extracted from an ID image.
+Use this skill when the user types **"id-ocr-skill"** (or asks to OCR an ID document) and wants structured identity details extracted from an ID image.
 
 ## Core Rules
 
