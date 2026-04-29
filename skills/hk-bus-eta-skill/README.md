@@ -3,7 +3,8 @@
 Hong Kong bus ETA lookup skill converted from OpenClaw into Hermes-agent format.
 
 ## Origin
-- Original skill source: `/home/derek/.openclaw/workspace/skills/hk-bus-eta`
+- Original skill source: `https://clawskills.sh/skills/tomfong-hk-bus-eta`
+- Original skill source path: `/home/derek/.openclaw/workspace/skills/hk-bus-eta`
 - Original author: Tom FONG
 
 ## Conversion
