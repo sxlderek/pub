@@ -13,3 +13,4 @@ Each skill folder includes:
 - `SKILL.md`
 - `README.md`
 - `LICENSE`
+- `siliconflow-media-skill` — SiliconFlow media workflows for image generation, video generation, TTS, and ASR.
