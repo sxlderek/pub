@@ -6,6 +6,7 @@ These skills were created by **hermes-agent** and live under `skills/`:
 - `id-ocr-skill` — Extract identity details from ID documents.
 - `whois-skill` — Look up domain WHOIS and DNS details.
 - `whatis-skill` — Explain technical terms in simple language.
+- `hk-bus-eta-skill` — Look up Hong Kong bus ETAs for KMB, CTB, and LWB.
 
 Each skill folder includes:
 
