@@ -83,6 +83,10 @@ Models:
 - For video generation, wait for the polling loop to finish; it may take 2–10 minutes.
 - For image-to-video, provide a real input image path with `--image`.
 - If `SILICONFLOW_API_KEY` is missing, the scripts exit immediately with an error.
+- For voice questions, answer in the same language/register as the spoken input:
+  - Cantonese voice question → reply in `繁體中文`
+  - Mandarin voice question → reply in `简体中文`
+  - English voice question → reply in plain English
 
 ## Linked Scripts
 
