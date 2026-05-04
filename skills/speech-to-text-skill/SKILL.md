@@ -23,7 +23,7 @@ Use this skill when the user wants transcription from a voice note, audio messag
    - a video message with speech
 3. If the input is a video message, extract the audio track first using `ffmpeg`.
 4. Use the `siliconflow-media` skill and its ASR workflow.
-5. Run SiliconFlow ASR with `TeleAI/TeleSpeechASR`.
+5. Run SiliconFlow ASR with `FunAudioLLM/SenseVoiceSmall`.
 6. Detect the spoken language:
    - Cantonese (Hong Kong)
    - Mandarin
@@ -35,7 +35,7 @@ Use this skill when the user wants transcription from a voice note, audio messag
 
 ## Important rules
 
-- Prefer the `TeleAI/TeleSpeechASR` model for transcription when available.
+- Prefer the `FunAudioLLM/SenseVoiceSmall` model for transcription when available.
 - If the user explicitly requests a different ASR model, follow that request instead of the default.
 - If the user sends a video, always extract audio before transcription.
 - If language is mixed, choose the dominant spoken language and mention that briefly if needed.
@@ -44,6 +44,9 @@ Use this skill when the user wants transcription from a voice note, audio messag
 ## Practical notes
 
 - Use `ffmpeg` to extract audio from video files, for example:
+- See `references/output-contract.md` for the current output contract and example normalization behavior.
+
+- If the user wants a retry with a different ASR engine, keep the response format stable: show both literal transcript and normalized meaning, rather than replacing one with the other.
 
 ```bash
 ffmpeg -i input.mp4 -vn -acodec copy output.m4a
@@ -51,6 +54,10 @@ ffmpeg -i input.mp4 -vn -acodec copy output.m4a
 
 - If direct stream copy fails, convert to a compatible audio format such as WAV or MP3.
 - If transcription quality is unclear, return the best-effort transcription and note uncertainty briefly.
+- If the user corrects a transcription, treat that as a signal to inspect model choice and listening assumptions before replying again.
+- See `references/model-selection-and-pitfalls.md` for model-choice notes and failure modes.
+- If the user corrects a transcription, treat that as a signal to inspect model choice and listening assumptions before replying again.
+- See `references/model-selection-and-pitfalls.md` for model-choice notes and failure modes.
 
 ## Output language mapping
 

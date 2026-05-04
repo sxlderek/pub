@@ -17,6 +17,8 @@ Use this skill when the user wants Pollinations-based generation or analysis:
 - audio transcription
 - text-to-speech / audio generation
 
+Use `scripts/models.sh` to confirm the current model catalog before relying on a specific model name.
+
 ## Requirements
 - `curl`
 - `jq`

@@ -1,6 +1,6 @@
 # pollinations-skill
 
-Pollinations AI generation and analysis skill.
+Pollinations skill converted from OpenClaw into Hermes-agent format.
 
 ## Origin
 - Original skill source: `https://github.com/openclaw/skills/commit/8f16bd443245726ae737b4bdfe5e36e65662c968`
@@ -10,14 +10,9 @@ Pollinations AI generation and analysis skill.
 
 ## Conversion
 - Converted and tested in Hermes-agent format.
-- Published as a Hermes skill package for the `pub/skills` repo.
-
-## Notes
-- Covers text, image, video, audio, vision, and transcription workflows.
-- Keep the bundled scripts in sync with `SKILL.md`.
+- Kept the skill layout compact for Hermes loading and reuse.
 
 ## Files
 - `SKILL.md`
-- `README.md`
 - `LICENSE`
 - `scripts/`

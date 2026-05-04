@@ -25,6 +25,20 @@ Use when the user asks for:
 3. If no result, retry conservatively with a shorter stop keyword or common alias.
 4. If still no result, return the fixed fallback message.
 
+## Journey-planning note
+
+This skill is optimized for *ETA / stop lookup*, not full origin-to-destination trip planning.
+If the user asks for a route like "from here to 元朗" or "去某區", first identify the likely destination hub/landmark (for example: 元朗市中心, 元朗站, 朗屏站) and then look up current route/timetable sources.
+For this workflow, see `references/route-planning.md`.
+
+Preferred approach for planning questions:
+- Ask for the exact target if the area name is broad.
+- Search official route pages or timetable PDFs when ETA lookup alone is insufficient.
+- If you find a likely direct bus, present it as a candidate and avoid claiming certainty unless verified from a current source.
+- Offer to narrow by "最少行路 / 最快 / 直達優先 / live ETA".
+
+Example: for Pak Shek Kok / Science Park to 元朗市中心, a likely direct candidate may exist, but it should still be verified against the current timetable before being treated as definitive.
+
 ## Commands
 
 ### Single route

@@ -1,32 +1,28 @@
-# whois-skill
+# OpenClaw `domaininfo` Skill
 
-Look up domain WHOIS information and optionally capture website screenshots.
+A domain analysis skill that produces a domain-only report with:
 
-## Origin
-- Original skill source: `/home/derek/.openclaw/workspace/skills/whois-skill`
-- Original author: Tom FONG
+- WHOIS summary
+- DNS records (A/AAAA/NS/MX)
+- Email security signals (DMARC/SPF/DKIM)
+- TLS certificate info
+- Optional website screenshot (only when screenshot tooling is already available)
 
-## Conversion
-- Converted and tested in Hermes-agent format.
-- Published as a Hermes skill package for the `pub/skills` repo.
+## Usage
 
-## What it does
+Type:
 
-Use this skill when the user asks for:
+- `whois <domain>`
 
-- WHOIS lookups
-- DNS records
-- DMARC / SPF / DKIM checks
-- TLS certificate details
-- website screenshots
+Supports:
+- Plain domains (e.g., `example.com`)
+- Full URLs (the skill extracts the domain)
+- Emails (the skill extracts the domain after `@`)
+- Internationalized domain names (IDNs) / non-ASCII domains (the skill can convert to Punycode automatically, e.g., `秒秒指南.com` → `xn--6krx87aehra.com`)
 
-## Notes
+## Screenshot behavior (important)
 
-- Validate and sanitize user input before any external calls.
-- Keep the final response compact and send it once.
-- Use timeouts for every external command.
+Screenshot is an optional enhancement.
 
-## Related files
-
-- `SKILL.md`
-- `LICENSE`
+- If the runtime has OpenClaw browser automation available, the skill may capture a screenshot.
+- If not, it must skip screenshot capture (no prompting the user to install Playwright/Chromium).
