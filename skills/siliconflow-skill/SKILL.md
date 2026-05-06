@@ -2,7 +2,7 @@
 name: siliconflow-skill
 slug: siliconflow-skill
 version: 1.0.0
-description: SiliconFlow media workflows for image generation, image editing, video generation, OCR, TTS, and ASR.
+description: SiliconFlow workflows and API development for chat, image generation, image editing, video generation, OCR, TTS, and ASR.
 ---
 
 ## When to Use
@@ -14,6 +14,40 @@ Use this skill when the user wants to use **SiliconFlow** for:
 - OCR / image text recognition
 - text-to-speech (TTS)
 - speech-to-text / ASR
+- SiliconFlow API development, model selection, deployment, and feature discovery
+
+## SiliconFlow API Development
+
+This skill now also covers the broader SiliconFlow API workflow, not just media generation.
+
+Use the API-focused parts of this skill when the user asks about:
+- SiliconFlow endpoints and request/response shapes
+- model catalogs and choosing the right model
+- deployment or integration questions
+- feature discovery and troubleshooting
+- example use cases and implementation patterns
+
+### Reference map
+
+The upstream SiliconFlow API skill is organized around these doc areas:
+- `api_reference.md` — endpoint-level API reference and payload shapes
+- `deployment.md` — deployment and environment guidance
+- `faqs.md` — common questions and troubleshooting
+- `features.md` — platform capabilities and feature overview
+- `models.md` — model listings and selection guidance
+- `other.md` — miscellaneous notes
+- `use_cases.md` — practical workflow examples
+- `userguide.md` — onboarding and usage guidance
+- `index.md` / `llms.md` / `llms-full.md` — generated overview and long-form reference views
+
+### How to use it
+
+- For endpoint details, start with the API reference.
+- For choosing a model, check the models section first.
+- For integration problems, consult deployment and FAQs.
+- For practical examples, use the use-cases documentation.
+- For this merged skill, prefer the existing script-backed workflows when the task is media/chat/ASR/TTS/OCR related.
+- If the user wants a general SiliconFlow API answer, keep the response concise and factual instead of focusing only on the media scripts.
 
 ## Chat / Text Completion
 
@@ -226,3 +260,4 @@ Practical note:
 - `references/omniroute-flux-api.md` — OmniRoute Flux API response format: returns base64 in `b64_json`, not URL
 - `references/babo-background.md` — user-defined "babo background" style: soft blue gradient bokeh for product photography, includes NanoBanana and GPT Image model recommendations
 - `references/hermes-memory-increase.md` — how to permanently increase Hermes memory limits via config.yaml editing
+- `references/siliconflow-api-merge.md` — merged API notes and doc map from the SiliconFlow API skill
