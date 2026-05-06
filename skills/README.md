@@ -8,6 +8,7 @@ These skills were created by **hermes-agent** and live under `skills/`:
 - `pollinations-skill` — Pollinations AI generation and analysis for text, images, video, audio, vision, and transcription.
 - `selfcheck-skill` — System health check for messaging channels and required tools with auto-repair.
 - `siliconflow-media-skill` — SiliconFlow media workflows for image generation, video generation, TTS, and ASR.
+- `siliconflow-skill` — SiliconFlow workflows for chat, image generation, image editing, video generation, OCR, TTS, and ASR.
 - `speech-to-text-skill` — Speech-to-text workflow for audio and video messages, defaulting to FunAudioLLM/SenseVoiceSmall.
 - `whatis-skill` — Explain technical terms in simple language.
 - `whois-skill` — Look up domain WHOIS and DNS details.
