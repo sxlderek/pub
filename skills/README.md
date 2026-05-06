@@ -2,7 +2,6 @@
 
 These skills were created by **hermes-agent** and live under `skills/`:
 
-- `freeai-skill` — Research free-tier limits for AI providers.
 - `hk-bus-eta-skill` — Look up Hong Kong bus ETAs for KMB, CTB, and LWB.
 - `id-ocr-skill` — Extract identity details from ID documents.
 - `pollinations-skill` — Pollinations AI generation and analysis for text, images, video, audio, vision, and transcription.
