@@ -17,6 +17,7 @@ tags:
 - User types `docren` with a path → process all documents in that directory
 - User uploads a PDF or Word document and mentions renaming → process only the uploaded document
 - The request clearly and explicitly implies document renaming
+- If the user asks to check Hermes email for PDFs, attachments, or mailbox documents and then run docren, treat that as an explicit docren request and use Hermes Mailbox Attachment Mode
 - User asks to process multiple documents in a directory (batch mode)
 
 ### Automation Policy
@@ -30,6 +31,7 @@ tags:
 - User types `docren` with a path → process all documents in that directory
 - User uploads a PDF or Word document and mentions renaming → process only the uploaded document
 - The request clearly and explicitly implies document renaming
+- If the user asks to check Hermes email for PDFs, attachments, or mailbox documents and then run docren, treat that as an explicit docren request and use Hermes Mailbox Attachment Mode
 - User asks to process multiple documents in a directory (batch mode)
 
 ### Automation Policy
@@ -55,6 +57,7 @@ See `references/token-saving-routing.md` for the compact extraction/routing reci
 See `references/ocr-fallbacks.md` for the local OCR stack and verification pattern that worked in Hermes.
 See `references/searchable-pdf-sidecar.md` for the resolved preference on in-place searchable PDFs vs sidecars.
 See `references/batch-processing.md` for batch-scope and file-move handling notes.
+See `references/email-attachments-from-himalaya.md` for the email-download → docren workflow.
 
 Do not send full OCR dumps to a model unless absolutely necessary.
 
@@ -69,6 +72,16 @@ When the user types `docren` alone (no file upload, no explicit path):
 - Create `sorted/` and `failed/` subdirectories if they don't exist (with group 100)
 - Process each document and move to `sorted/` (success) or `failed/` (error)
 - Report a summary
+
+**Hermes Mailbox Attachment Mode:**
+When the user explicitly asks to check the Hermes mailbox for PDF attachments and run docren on them:
+- Use the configured Hermes email account to list mail in INBOX
+- Prefer messages with `has_attachment=true` or obvious PDF-related subjects/senders
+- Download attached PDFs to a temporary working directory under `/tmp/incoming/`
+- Extract and rename each attachment using the standard docren rules
+- Save the renamed outputs to `/mnt/aihome/docren/sorted/`
+- If a message or attachment cannot be processed, report the blocker and save the failed item to `/mnt/aihome/docren/failed/` when possible
+- Do not ask for confirmation for this flow unless a destructive move is required outside the docren output directories
 
 **Explicit Batch Mode:**
 When the user specifies a directory path (e.g., "docren /path/to/dir"):
@@ -114,8 +127,12 @@ Do not paste full OCR dumps into chat unless needed. Reduce raw document output 
   - Document type
 
 ### 4. OCR Rules for Scanned PDFs
+### 4. OCR Rules for Scanned PDFs
 If the PDF is scanned or image-only:
 - Render page 1 to an image before OCRing it
+- Deskew scanned pages before OCR when the page is visibly tilted or skewed
+- Remove blank pages before OCR and before saving the final processed document when they are clearly empty
+- Treat a page as blank when it has no meaningful text and only negligible marks (for example: empty OCR result, page number only, or tiny specks/noise)
 - Prefer a Chinese-capable OCR path for mixed Chinese/English pages: `RapidOCR` on the rendered image works well in this environment
 - If using Tesseract, set `TESSDATA_PREFIX=/opt/data/tessdata` so `chi_sim` and `chi_tra` are available
 - If the document is bilingual Chinese/English, preserve both when possible
@@ -130,9 +147,11 @@ If the PDF is scanned or image-only:
 
 Typical OCR flow:
 1. Render page 1 to image
-2. Run RapidOCR or Tesseract OCR with the correct tessdata
-3. Extract only relevant lines/fields
-4. OCR more pages only if necessary
+2. Deskew if needed
+3. Remove blank pages if needed
+4. Run RapidOCR or Tesseract OCR with the correct tessdata
+5. Extract only relevant lines/fields
+6. OCR more pages only if necessary
 
 ### 5. Word Document Rules
 For `.docx` files:
