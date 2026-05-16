@@ -1,6 +1,6 @@
 ---
-name: hk-bus-eta
-slug: hk-bus-eta
+name: hkbus-skill
+slug: hkbus-skill
 version: 1.1.0
 description: Hong Kong bus ETA lookup for KMB, CTB, and LWB with fast stop matching, bilingual output, and safe no-result fallbacks.
 ---

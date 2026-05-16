@@ -2,7 +2,7 @@
 
 These skills were created by **hermes-agent** and live under `skills/`:
 
-- `hk-bus-eta-skill` — Look up Hong Kong bus ETAs for KMB, CTB, and LWB.
+- `hkbus-skill` — Look up Hong Kong bus ETAs for KMB, CTB, and LWB.
 - `id-ocr-skill` — Extract identity details from ID documents.
 - `pollinations-skill` — Pollinations AI generation and analysis for text, images, video, audio, vision, and transcription.
 - `selfcheck-skill` — System health check for messaging channels and required tools with auto-repair.

@@ -12,7 +12,7 @@
 
 ## Technical Overview | 技術概述
 
-**Skill Name:** `hk-bus-eta`  
+**Skill Name:** `hkbus-skill`  
 **Version:** 1.0.2  
 **Last Updated:** 2026-03-14  
 **Compatibility:** OpenClaw and compatible AI agents
@@ -84,7 +84,7 @@ python3 sync_bus_stops.py
 ## File Structure | 文件結構
 
 ```
-hk-bus-eta/
+hkbus-skill/
 ├── README.md          # This file (technical reference)
 ├── SKILL.md           # AI agent specification
 └── scripts/
